@@ -8,7 +8,7 @@ export default function AboutPage() {
             <div className="max-w-3xl mx-auto">
                 <h1 className="text-4xl font-bold mb-4">About DevRecall</h1>
                 <p className="text-lg mb-6">
-                    DevRecall is a platform designed to help developers document, organize, and revisit their knowledge throughout their engineering journey. Whether you're preparing for interviews, managing technical notes, or just want a personal wiki — DevRecall makes it effortless.
+                    DevRecall is a platform designed to help developers document, organize, and revisit their knowledge throughout their engineering journey. Whether you are preparing for interviews, managing technical notes, or just want a personal wiki — DevRecall makes it effortless.
                 </p>
 
                 <h2 className="text-2xl font-semibold mb-2">Our Mission</h2>
@@ -18,7 +18,7 @@ export default function AboutPage() {
 
                 <h2 className="text-2xl font-semibold mb-2">The Team</h2>
                 <p className="mb-6">
-                    Built by passionate engineers, for engineers. We're a small team that believes in user-focused design, performance, and elegant simplicity.
+                    Built by passionate engineers, for engineers. We are a small team that believes in user-focused design, performance, and elegant simplicity.
                 </p>
 
                 <h2 className="text-2xl font-semibold mb-2">Tech Stack</h2>

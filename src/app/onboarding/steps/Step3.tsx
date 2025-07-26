@@ -2,7 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useOnboardingStore } from '@/stores/useOnboardingStore';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import {useUserStore} from "@/stores/useUserStore";

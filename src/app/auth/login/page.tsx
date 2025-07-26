@@ -1,10 +1,13 @@
 'use client';
 
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
     const router = useRouter();
+    const supabase = createClientComponentClient();
+
     const [form, setForm] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
@@ -17,12 +20,15 @@ export default function SignInPage() {
         e.preventDefault();
         setError("");
 
-        // Simulated auth: Replace with real auth logic (Supabase, Clerk, etc.)
-        if (form.email === "test@example.com" && form.password === "password") {
-            document.cookie = "auth_token=dummy_token; path=/";
-            router.push("/dashboard");
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: form.email,
+            password: form.password,
+        });
+
+        if (error) {
+            setError(error.message);
         } else {
-            setError("Invalid email or password");
+            router.push("/dashboard");
         }
     };
 

@@ -22,14 +22,37 @@ export default function Step3() {
 
     const handleFinish = async () => {
         setSaving(true);
-        const { error } = await supabase.from('users').update({ visibility: user.visibility }).eq('id', user.id);
-        if (error) {
-            console.error('Failed to save visibility:', error.message);
-        } else {
-            // end onboarding or redirect to dashboard
-            router.push('/dashboard'); // redirect to dashboard
-            //setStep(0);
+
+        // 1. Update user's visibility
+        const { error: visibilityError } = await supabase
+            .from('users')
+            .update({ visibility: user.visibility })
+            .eq('id', user.id);
+
+        if (visibilityError) {
+            console.error('Failed to save visibility:', visibilityError.message);
+            setSaving(false);
+            return;
         }
+
+        // 2. Prepare folder records based on stack_items
+        const foldersToInsert = user.stack_items.map((stackItem) => ({
+            user_id: user.id,
+            stack_item_id: stackItem.id,
+            name: stackItem.name,
+        }));
+
+        // 3. Insert into folders table
+        const { error: folderInsertError } = await supabase
+            .from('folders')
+            .insert(foldersToInsert);
+
+        if (folderInsertError) {
+            console.error('Failed to insert folders:', folderInsertError.message);
+        } else {
+            router.push('/dashboard');
+        }
+
         setSaving(false);
     };
 

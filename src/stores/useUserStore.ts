@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { User } from '@/types/user';
+import { StackItem } from '@/types/stack_item';
 
 type UserState = {
     user: User;
@@ -7,7 +8,7 @@ type UserState = {
     reset: () => void;
     setRole: (role: string) => void;
     setLevel: (level: string) => void;
-    setStack: (stack_items: string[]) => void;
+    setStack: (stack_items: StackItem[]) => void;
     setVisibility: (visibility: 'public' | 'private') => void;
 };
 
@@ -38,7 +39,7 @@ export const useUserStore = create<UserState>((set) => ({
         }
     })),
 
-    setStack: (stack_items: string[]) => set((state) => ({
+    setStack: (stack_items: StackItem[]) => set((state) => ({
         user: {
             ...state.user,
             stack_items,

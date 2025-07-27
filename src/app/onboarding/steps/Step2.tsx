@@ -20,8 +20,6 @@ export default function Step2() {
         const fetchStacks = async () => {
             setLoading(true);
 
-
-
             const { data, error } = await supabase.rpc('get_stack_items_by_role', {
                 role_input: user.role,
             });
@@ -42,28 +40,37 @@ export default function Step2() {
     }, [user.role, supabase]);
 
     const toggleStack = (id: string) => {
-        const currentStack = Array.isArray(user.stack_items) ? user.stack_items : [];
+        if (!stackOptions || !Array.isArray(stackOptions)) return;
 
-        if (currentStack.includes(id)) {
-            setStack(currentStack.filter((s) => s !== id));
-        } else if (currentStack.length < 20) {
-            setStack([...currentStack, id]);
+        const item = stackOptions.find((s) => s.id === id);
+        if (!item) return;
+
+        const exists = (user.stack_items || []).find((s) => s.id === id);
+
+        if (exists) {
+            setStack(user.stack_items.filter((s) => s.id !== id));
+        } else if (!user.stack_items || user.stack_items.length < 20) {
+            setStack([...(user.stack_items || []), item]);
         }
     };
 
     const handleNext = async () => {
         setSaving(true);
 
-        // Remove existing stack (if re-onboarding)
-        await supabase.from('users').update({stack_items: ""}).eq('id', user.id);
+        // Optional: Reset previous selection
+        await supabase.from('users').update({ stack_items: [] }).eq('id', user.id);
 
-        const { error } = await supabase.from('users').update({stack_items: user.stack_items}).eq('id', user.id);
+        const { error } = await supabase
+            .from('users')
+            .update({ stack_items: user.stack_items.map((s) => s.id) }) // Only send IDs to Supabase
+            .eq('id', user.id);
 
         if (error) {
             console.error('Failed to save stack:', error.message);
         } else {
             setStep(3);
         }
+
         setSaving(false);
     };
 
@@ -79,7 +86,7 @@ export default function Step2() {
                             key={id}
                             onClick={() => toggleStack(id)}
                             className={`border cursor-pointer rounded px-3 py-2 text-sm ${
-                                user.stack_items?.includes(id) ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700' : 'border-gray-300 hover:bg-gray-100'
+                                user.stack_items?.some((item) => item.id === id) ? 'bg-blue-600 text-white border-blue-600 hover:bg-blue-700' : 'border-gray-300 hover:bg-gray-100'
                             }`}
                         >
                             {name}

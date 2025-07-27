@@ -1,0 +1,63 @@
+/* e.g., for GitHub style */
+@import 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+@import 'prism-themes/themes/prism-one-dark.css';
+@import 'highlight.js/styles/github.css';
+
+.ProseMirror {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  h1 { font-size: 1.875rem; font-weight: 700; }
+  h2 { font-size: 1.5rem; font-weight: 600; }
+  h3 { font-size: 1.25rem; font-weight: 600; }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 4px solid #ddd;
+    color: #555;
+  }
+
+  code {
+    font-family: monospace;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+  }
+
+  pre {
+    background: #1e1e1e;
+    color: #f8f8f2;
+    padding: 1em;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+
+  ul, ol {
+    padding-left: 1.25em;
+  }
+
+  ul li::marker {
+    color: #999;
+  }
+
+  ol li::marker {
+    color: #666;
+  }
+
+  .task-list-item {
+    list-style: none;
+  }
+
+  .task-list-item input {
+    margin-right: 0.5em;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: underline;
+  }
+
+  .text-align-left { text-align: left; }
+  .text-align-center { text-align: center; }
+  .text-align-right { text-align: right; }
+}

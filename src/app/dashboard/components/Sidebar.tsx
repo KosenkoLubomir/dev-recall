@@ -31,7 +31,7 @@ export default function Sidebar() {
     return (
         <aside className="w-64 bg-gray-100 border-r border-gray-200 p-4 hidden md:block">
             <div className={"mb-4 pb-4 border-b border-gray-300"}>
-                <Link href="/public">
+                <Link href="/">
                     <Image
                         src="/images/dev-recall.png"
                         alt="Heard Logo"

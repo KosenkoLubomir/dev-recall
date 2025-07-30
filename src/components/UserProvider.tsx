@@ -59,13 +59,13 @@ export default function UserProvider({ children }: { children: React.ReactNode }
         };
     }, [supabase, setUser, user?.id]);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <span className="text-gray-500">Loading...</span>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="min-h-screen flex items-center justify-center">
+    //             <span className="text-gray-500">Loading...</span>
+    //         </div>
+    //     );
+    // }
 
     return <>{children}</>;
 }

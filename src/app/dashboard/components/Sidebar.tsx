@@ -9,10 +9,9 @@ import {
     SettingsIcon,
     ChevronDownIcon,
 } from 'lucide-react';
-import Image from "next/image";
-import Link from "next/link";
 import {useDashboardStore} from "@/stores/useDashboardStore";
 import FolderItem from './FolderItem';
+import Logo from "@/components/Logo";
 
 export default function Sidebar() {
     const { user, reset } = useUserStore();
@@ -31,15 +30,7 @@ export default function Sidebar() {
     return (
         <aside className="w-64 bg-gray-100 border-r border-gray-200 p-4 hidden md:block">
             <div className={"mb-4 pb-4 border-b border-gray-300"}>
-                <Link href="/">
-                    <Image
-                        src="/images/dev-recall.png"
-                        alt="Heard Logo"
-                        width={88}
-                        height={40}
-                        className="h-10"
-                    />
-                </Link>
+                <Logo view={"horizontal"} />
             </div>
 
             <div className="relative mb-6">

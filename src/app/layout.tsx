@@ -13,8 +13,10 @@ export const metadata: Metadata = {
     title: "DevRecall",
     description: "Your personal interview prep space — structured, focused, and made for developers.",
     icons: {
-        icon: "/images/favicon.png",
-        shortcut: "/images/favicon.png",
+        icon: [
+            { url: "/images/favicon.png", type: "image/png" },
+            { url: "/images/dev-recall-logo.png", rel: "shortcut icon", type: "image/png" },
+        ],
     },
     keywords: [
         "DevRecall",
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "DevRecall",
         description: "Prep for interviews with notes organized by stack.",
-        images: ["/images/dev-recall.png"]
+        images: ["/images/dev-recall-logo.png"]
     }
 };
 

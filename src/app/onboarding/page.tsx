@@ -8,6 +8,7 @@ import Step3 from '@/app/onboarding/steps/Step3';
 import {createClientComponentClient} from "@supabase/auth-helpers-nextjs";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useUserStore} from "@/stores/useUserStore";
+import { Suspense } from 'react';
 
 export default function OnboardingPage() {
     const [loading, setLoading] = useState(true);
@@ -60,7 +61,7 @@ export default function OnboardingPage() {
 
 
     if (loading) {
-        return <div className="min-h-screen flex items-center justify-center">Loading onboarding…</div>;
+        return <div className="min-h-screen flex items-center justify-center">Loading onboarding...</div>;
     }
 
     const renderStep = () => {
@@ -77,43 +78,43 @@ export default function OnboardingPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-start px-6 py-12 bg-gray-50">
-            {/* Progress Bar */}
-            <div className="w-full max-w-2xl mb-4">
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                        className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
-                    ></div>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <div className="min-h-screen flex flex-col items-center justify-start px-6 py-12 bg-gray-50">
+                <div className="w-full max-w-2xl mb-4">
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                            style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
+                        ></div>
+                    </div>
+                    <div className="text-sm text-gray-500 text-right mt-1">
+                        Step {step} of {TOTAL_STEPS}
+                    </div>
                 </div>
-                <div className="text-sm text-gray-500 text-right mt-1">
-                    Step {step} of {TOTAL_STEPS}
-                </div>
-            </div>
 
-            <div className="flex justify-between items-center mb-8 w-full max-w-2xl">
-                <button
-                    onClick={() => setStep(step - 1)}
-                    disabled={step === 1}
-                    className="cursor-pointer text-blue-600 hover:underline disabled:text-gray-400 disabled:cursor-not-allowed"
-                >
-                    ← Back
-                </button>
-
-                {step < TOTAL_STEPS && (
+                <div className="flex justify-between items-center mb-8 w-full max-w-2xl">
                     <button
-                        onClick={() => setStep(step + 1)}
-                        className="cursor-pointer text-blue-600 hover:underline"
+                        onClick={() => setStep(step - 1)}
+                        disabled={step === 1}
+                        className="cursor-pointer text-blue-600 hover:underline disabled:text-gray-400 disabled:cursor-not-allowed"
                     >
-                        Next →
+                        ← Back
                     </button>
-                )}
-            </div>
 
-            {/* Step Content */}
-            <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
-                {renderStep()}
+                    {step < TOTAL_STEPS && (
+                        <button
+                            onClick={() => setStep(step + 1)}
+                            className="cursor-pointer text-blue-600 hover:underline"
+                        >
+                            Next →
+                        </button>
+                    )}
+                </div>
+
+                <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
+                    {renderStep()}
+                </div>
             </div>
-        </div>
+        </Suspense>
     );
 }

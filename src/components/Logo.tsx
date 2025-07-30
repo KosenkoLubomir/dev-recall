@@ -3,16 +3,17 @@ import Link from "next/link";
 
 type LogoProps = {
     view?: "standard" | "horizontal";
+    classes?: string;
 }
 
 const Logo = (
-    { view = "standard" }: LogoProps
+    { view = "standard", classes }: LogoProps
 ) => {
 
     const standard = view === "standard";
 
     return (
-        <Link className={"flex gap-2 font-bold items-center"} href="/">
+        <Link className={`flex gap-2 font-bold items-center ${classes}`} href="/">
             <Image
                 src="/images/dev-recall-logo.png"
                 alt="Heard Logo"

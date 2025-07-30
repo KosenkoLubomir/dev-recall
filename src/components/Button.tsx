@@ -27,7 +27,7 @@ export default function Button({
                                           disabled,
                                       }: BtnProps) {
 
-    const classes = `inline-flex border-1 relative items-center whitespace-nowrap shrink-0 transition-bg transition-border transition-color duration-200 ease-in-out rounded-md     
+    const classes = `inline-flex cursor-pointer border-1 relative items-center whitespace-nowrap shrink-0 transition-bg transition-border transition-color duration-200 ease-in-out rounded-md     
     ${ !disabled && view === "primary" ? "bg-blue-500 border-blue-500 text-white hover:bg-blue-600 hover:border-blue-600 active:bg-blue-700 active:border-blue-700" : "" } 
     ${!disabled && view === "success" ? "bg-green-500 border-green-500 text-white hover:bg-green-600 hover:border-green-600 active:bg-green-700 active:border-green-700" : "" }
     ${ !disabled && view === "secondary" ? "bg-gray-600 border-gray-600 text-white hover:bg-gray-500 hover:border-gray-500 active:bg-gray-700 active:border-gray-700" : "" }

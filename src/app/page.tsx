@@ -1,6 +1,3 @@
-
-// app/page.tsx
-
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Button from "@/components/Button";
@@ -15,44 +12,6 @@ import {
 } from 'lucide-react';
 
 export default function LandingPage() {
-
-    const features = [
-            {
-                icon: <FolderKanban className="w-8 h-8 text-blue-600" />,
-                title: 'Structured Folders & Pages',
-                desc: 'Organize by topic, tech, or project',
-            },
-            {
-                icon: <Bookmark className="w-8 h-8 text-blue-600" />,
-                title: 'Save Videos & Resources',
-                desc: 'Quickly bookmark and revisit helpful links',
-            },
-            {
-                icon: <BrainCircuit className="w-8 h-8 text-blue-600" />,
-                title: 'Self-Check Quizzes',
-                desc: 'Test your understanding with custom questions',
-            },
-            {
-                icon: <BellRing className="w-8 h-8 text-blue-600" />,
-                title: 'Stay Up-to-Date',
-                desc: 'Get notified when tools in your stack update',
-            },
-            {
-                icon: <Globe className="w-8 h-8 text-blue-600" />,
-                title: 'Public or Private Notes',
-                desc: 'Share ideas or keep your growth personal',
-            },
-            {
-                icon: <Users className="w-8 h-8 text-blue-600" />,
-                title: 'Dev Community',
-                desc: 'Connect with like-minded developers',
-            },
-            {
-                icon: <PenSquare className="w-8 h-8 text-blue-600" />,
-                title: 'Write & Publish Posts',
-                desc: 'Document your journey or teach others',
-            },
-        ];
 
     const challenges = [
         {
@@ -75,6 +34,51 @@ export default function LandingPage() {
             icon: '📉',
             text: 'Switching between languages/stacks is challenging without a quick recap'
         }
+    ];
+
+    const features = [
+        {
+            icon: <FolderKanban className="w-8 h-8 text-blue-600" />,
+            title: 'Structured Folders & Pages',
+            desc: 'Organize by topic, tech, or project',
+        },
+        {
+            icon: <Bookmark className="w-8 h-8 text-blue-600" />,
+            title: 'Save Videos & Resources',
+            desc: 'Quickly bookmark and revisit helpful links',
+        },
+        {
+            icon: <BrainCircuit className="w-8 h-8 text-blue-600" />,
+            title: 'Self-Check Quizzes',
+            desc: 'Test your understanding with custom questions',
+        },
+        {
+            icon: <BellRing className="w-8 h-8 text-blue-600" />,
+            title: 'Stay Up-to-Date',
+            desc: 'Get notified when tools in your stack update',
+        },
+        {
+            icon: <Globe className="w-8 h-8 text-blue-600" />,
+            title: 'Public or Private Notes',
+            desc: 'Share ideas or keep your growth personal',
+        },
+        {
+            icon: <Users className="w-8 h-8 text-blue-600" />,
+            title: 'Dev Community',
+            desc: 'Connect with like-minded developers',
+        },
+        {
+            icon: <PenSquare className="w-8 h-8 text-blue-600" />,
+            title: 'Write & Publish Posts',
+            desc: 'Document your journey or teach others',
+        },
+    ];
+
+    const onboardingSteps = [
+        'Choose your role and experience level',
+        'Select the tech stack you use',
+        'Pick your privacy settings',
+        'Start organizing your knowledge',
     ];
 
     return (
@@ -142,12 +146,7 @@ export default function LandingPage() {
                     <h3 className="text-2xl font-bold mb-8">Onboarding is simple ^_^</h3>
 
                     <div className="relative border-l-3 border-blue-200 ml-6 space-y-8 text-left mb-16 pl-0.5">
-                        {[
-                            'Choose your role and experience level',
-                            'Select the tech stack you use',
-                            'Pick your privacy settings',
-                            'Start organizing your knowledge',
-                        ].map((step, index) => (
+                        {onboardingSteps.map((step, index) => (
                             <div key={index} className="relative pl-8">
                                 <div className="absolute -left-5 -top-1 w-8 h-8 rounded-full border-2 border-blue-500 bg-white text-blue-600 flex items-center justify-center font-semibold text-sm">
                                     {index + 1}

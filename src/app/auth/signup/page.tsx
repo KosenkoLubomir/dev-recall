@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import Logo from "@/components/Logo";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -42,6 +45,10 @@ export default function SignUpPage() {
     return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
+
                 <h2 className="text-2xl font-bold mb-4">Create Account</h2>
 
                 {error && <p className="text-red-500 mb-3">{error}</p>}
@@ -54,7 +61,7 @@ export default function SignUpPage() {
                         value={form.name}
                         onChange={handleChange}
                         required
-                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+                        className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
 
@@ -66,7 +73,7 @@ export default function SignUpPage() {
                         value={form.email}
                         onChange={handleChange}
                         required
-                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+                        className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
 
@@ -78,17 +85,19 @@ export default function SignUpPage() {
                         value={form.password}
                         onChange={handleChange}
                         required
-                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+                        className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-                >
-                    {loading ? 'Signing up...' : 'Sign Up'}
-                </button>
+                <div className={"text-center"}>
+                    <Button type={"submit"} view={"primary"} disabled={loading}>{loading ? 'Signing up...' : 'Sign Up'}</Button>
+                    <p className="mt-4 text-sm text-gray-600">
+                        Already have an account?{' '}
+                        <Link href="/auth/login" className="text-blue-600 hover:underline">
+                            Log in
+                        </Link>
+                    </p>
+                </div>
             </form>
         </div>
     );

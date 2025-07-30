@@ -1,8 +1,11 @@
 'use client';
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Logo from "@/components/Logo";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function SignInPage() {
     const router = useRouter();
@@ -10,6 +13,7 @@ export default function SignInPage() {
 
     const [form, setForm] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -19,6 +23,7 @@ export default function SignInPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+        setLoading(true);
 
         const { error } = await supabase.auth.signInWithPassword({
             email: form.email,
@@ -30,12 +35,17 @@ export default function SignInPage() {
         } else {
             router.push("/dashboard");
         }
+        setLoading(false);
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
+
+                <h2 className="text-2xl font-bold mb-4">Login</h2>
 
                 {error && <p className="text-red-500 mb-3">{error}</p>}
 
@@ -47,7 +57,7 @@ export default function SignInPage() {
                         value={form.email}
                         onChange={handleChange}
                         required
-                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+                        className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
 
@@ -59,16 +69,20 @@ export default function SignInPage() {
                         value={form.password}
                         onChange={handleChange}
                         required
-                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring"
+                        className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white font-semibold py-2 rounded hover:bg-blue-700"
-                >
-                    Sign In
-                </button>
+                <div className={"text-center"}>
+                    <Button type={"submit"} view={"primary"} disabled={loading}>{loading ? 'Signing in...' : 'Sign In'}</Button>
+                    <p className="mt-4 text-sm text-gray-600">
+
+                        Don`t have an account?{" "}
+                        <Link href="/auth/signup" className="text-blue-600 hover:underline">
+                            Sign Up
+                        </Link>
+                    </p>
+                </div>
             </form>
         </div>
     );

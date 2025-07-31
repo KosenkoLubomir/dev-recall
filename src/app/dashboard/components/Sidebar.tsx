@@ -7,7 +7,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import {
     LogOutIcon,
     SettingsIcon,
-    ChevronDownIcon, Globe, Youtube, TvMinimalPlay, Newspaper,
+    ChevronDownIcon, Globe, TvMinimalPlay, Newspaper,
 } from 'lucide-react';
 import {useDashboardStore} from "@/stores/useDashboardStore";
 import FolderItem from './FolderItem';

@@ -1,10 +1,11 @@
 'use client';
 
-import {useState} from 'react';
+import React, {useState} from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useOnboardingStore } from '@/stores/useOnboardingStore';
 import { useUserStore} from "@/stores/useUserStore";
 import { ROLES, LEVELS } from '@/constants/userOptions';
+import Button from "@/components/Button";
 
 export default function Step1() {
     const supabase = createClientComponentClient();
@@ -42,7 +43,7 @@ export default function Step1() {
             <div className="mb-4">
                 <label className="block font-medium mb-1">Role</label>
                 <select
-                    className="w-full border px-3 py-2 rounded"
+                    className="w-full border px-3 py-2 rounded focus:outline-none border-gray-300 focus:border-blue-500"
                     value={user?.role || ''}
                     onChange={(e) => setRole(e.target.value)}
                 >
@@ -56,7 +57,7 @@ export default function Step1() {
             <div className="mb-4">
                 <label className="block font-medium mb-1">Level</label>
                 <select
-                    className="w-full border px-3 py-2 rounded"
+                    className="w-full border px-3 py-2 rounded focus:outline-none border-gray-300 focus:border-blue-500"
                     value={user?.level || ''}
                     onChange={(e) => setLevel(e.target.value)}
                 >
@@ -67,13 +68,7 @@ export default function Step1() {
                 </select>
             </div>
 
-            <button
-                disabled={loading || !user?.role || !user?.level}
-                onClick={handleNext}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-            >
-                {loading ? 'Saving...' : 'Next'}
-            </button>
+            <Button onClick={handleNext} view={"primary"} disabled={loading || !user?.role || !user?.level}>{loading ? 'Saving...' : 'Next'}</Button>
         </div>
     );
 }

@@ -13,10 +13,16 @@ export default function OnboardingPageInner() {
     const [loading, setLoading] = useState(true);
     const { step, setStep } = useOnboardingStore();
     const { user } = useUserStore();
+    const router = useRouter();
     const TOTAL_STEPS = 3;
 
+    useEffect(() => {
+        if (user?.role && user?.level && user?.stack_items?.length) {
+            router.replace('/dashboard');
+        }
+    }, [user, router]);
+
     const supabase = createClientComponentClient();
-    const router = useRouter();
     const searchParams = useSearchParams();
 
     useEffect(() => {

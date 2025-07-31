@@ -20,7 +20,7 @@ export default function OnboardingPageInner() {
         if (user?.role && user?.level && user?.stack_items?.length) {
             router.replace('/dashboard');
         }
-    }, [user, router]);
+    }, [user?.id, router]);
 
     const supabase = createClientComponentClient();
     const searchParams = useSearchParams();

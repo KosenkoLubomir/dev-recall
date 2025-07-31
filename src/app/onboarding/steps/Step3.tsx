@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import {useUserStore} from "@/stores/useUserStore";
 import Button from "@/components/Button";
+import useCopyDefaultPages from '@/hooks/useCopyDefaultPages';
 
 export default function Step3() {
     const supabase = createClientComponentClient();
@@ -15,6 +16,7 @@ export default function Step3() {
 
     const [saving, setSaving] = useState(false);
     const router = useRouter();
+    const { copyDefaultPagesToUser } = useCopyDefaultPages();
 
     const handleSelect = async (value: 'public' | 'private') => {
         setVisibility(value);
@@ -46,10 +48,17 @@ export default function Step3() {
 
         if (folderInsertError) {
             console.error('Failed to insert folders:', folderInsertError.message);
-        } else {
-            router.push('/dashboard');
+            setSaving(false);
+            return;
         }
 
+        await Promise.all(
+            user.stack_items.map((stackItem) =>
+                copyDefaultPagesToUser(stackItem.id, user.id)
+            )
+        );
+
+        router.push('/dashboard');
         setSaving(false);
     };
 

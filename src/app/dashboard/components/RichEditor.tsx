@@ -35,7 +35,14 @@ const supportedLanguages = [
     { label: 'Bash', value: 'bash' },
 ];
 
-export default function RichEditor({ content, onChange }: { content: string; onChange: (html: string) => void }) {
+import { JSONContent } from '@tiptap/react';
+
+type RichEditorProps = {
+    content: JSONContent;
+    onChange: (value: JSONContent) => void;
+};
+
+export default function RichEditor({ content, onChange }: RichEditorProps) {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -54,8 +61,8 @@ export default function RichEditor({ content, onChange }: { content: string; onC
                 class: 'ProseMirror focus:outline-none border border-gray-300 rounded p-3 min-h-[200px]',
             },
         },
-        onUpdate({ editor }) {
-            onChange(editor.getHTML());
+        onUpdate: ({ editor }) => {
+            onChange(editor.getJSON());
         },
         autofocus: true,
         immediatelyRender: false,

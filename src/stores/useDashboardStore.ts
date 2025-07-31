@@ -16,7 +16,6 @@ type DashboardState = {
     setCreatingForFolder: (folderId: string | null) => void;
     addPage: (folderId: string, page: Page) => void;
     toggleFolder: (id: string) => void;
-    expandFolder: (id: string) => void;
     expandedFolders: Record<string, boolean>;
 };
 
@@ -65,12 +64,5 @@ export const useDashboardStore = create<DashboardState>((set) => ({
                 ...state.expandedFolders,
                 [id]: !state.expandedFolders[id],
             },
-        })),
-    expandFolder: (id: string) =>
-        set((state) => ({
-            expandedFolders: {
-                ...state.expandedFolders,
-                [id]: true,
-            },
-        })),
+        }))
 }));

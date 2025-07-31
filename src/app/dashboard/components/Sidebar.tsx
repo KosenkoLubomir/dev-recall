@@ -73,7 +73,7 @@ export default function Sidebar() {
             {!folders ? (
                 <p className="text-sm text-gray-500">Loading...</p>
             ) : folders.length > 0 ? (
-                <nav className="space-y-2">
+                <nav>
                     {folders.map((folder) => (
                         <FolderItem
                             key={folder.id}

@@ -14,7 +14,7 @@ export default function FoldersList() {
     useEffect(() => {
         const fetchData = async () => {
 
-            if (user && !folders?.length) {
+            if (user.id && !folders?.length) {
                 const { data: folderData } = await supabase
                     .from('folders')
                     .select('*')
@@ -26,7 +26,7 @@ export default function FoldersList() {
         };
 
         fetchData();
-    }, [supabase, folders, user, setFolders]);
+    }, [supabase, folders, user.id, setFolders]);
 
     return (
         <div>

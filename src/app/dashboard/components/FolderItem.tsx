@@ -32,11 +32,11 @@ export default function FolderItem({ folder }: Props) {
     return (
         <div>
             <div
-                className={`${selectedFolder === id ? 'text-blue-700' : 'text-gray-700'} flex items-center justify-between hover:text-blue-600 cursor-pointer py-1.5 rounded-md transition-colors`}
+                className={`${selectedFolder === id ? 'text-blue-700' : 'text-gray-700'} flex items-center justify-between hover:text-blue-600 cursor-pointer py-1.5 transition-colors`}
                 onClick={handleFolderClick}
             >
                 <div className="flex items-center space-x-2">
-                    <FolderIcon className="w-5 h-5" />
+                    <FolderIcon size={18} />
                     <span>{name}</span>
                     {pages_count > 0 && (expanded ? (
                             <ChevronDownIcon className="w-4 h-4" />

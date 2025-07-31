@@ -7,7 +7,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import {
     LogOutIcon,
     SettingsIcon,
-    ChevronDownIcon,
+    ChevronDownIcon, Globe, Youtube, TvMinimalPlay, Newspaper,
 } from 'lucide-react';
 import {useDashboardStore} from "@/stores/useDashboardStore";
 import FolderItem from './FolderItem';
@@ -64,26 +64,43 @@ export default function Sidebar() {
 
             {/* Stack Items */}
 
-            <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold mb-0">Your Stack</h2>
-                <button className="text-blue-500 text-sm cursor-pointer px-2 py-1 rounded-md hover:bg-blue-100">
-                    + New Folder
-                </button>
+            <div className="mb-4">
+                <div className="flex items-center justify-between mb-2">
+                    <h2 className="text-lg font-semibold mb-0">Your Stack</h2>
+                    <button className="text-blue-500 text-sm cursor-pointer px-2 py-1 rounded-md hover:bg-blue-100">
+                        + New Folder
+                    </button>
+                </div>
+                {!folders ? (
+                    <p className="text-sm text-gray-500">Loading...</p>
+                ) : folders.length > 0 ? (
+                    <nav>
+                        {folders.map((folder) => (
+                            <FolderItem
+                                key={folder.id}
+                                folder={folder}
+                            />
+                        ))}
+                    </nav>
+                ) : (
+                    <p className="text-sm text-gray-500">No stack items selected</p>
+                )}
             </div>
-            {!folders ? (
-                <p className="text-sm text-gray-500">Loading...</p>
-            ) : folders.length > 0 ? (
-                <nav>
-                    {folders.map((folder) => (
-                        <FolderItem
-                            key={folder.id}
-                            folder={folder}
-                        />
-                    ))}
-                </nav>
-            ) : (
-                <p className="text-sm text-gray-500">No stack items selected</p>
-            )}
+
+            <div className="mb-4">
+                <h2 className="text-lg font-semibold mb-2">Bookmarks</h2>
+                <ul className={"flex flex-col items-start"} >
+                    <li className={"inline-flex items-center space-x-2 text-gray-700 hover:text-blue-600 cursor-pointer py-1.5 transition-colors"}>
+                        <Globe size={18}/> <span>Web-resources</span>
+                    </li>
+                    <li className={"inline-flex items-center space-x-2 text-gray-700 hover:text-blue-600 cursor-pointer py-1.5 transition-colors"}>
+                        <TvMinimalPlay size={18}/> <span>Videos</span>
+                    </li>
+                    <li className={"inline-flex items-center space-x-2 text-gray-700 hover:text-blue-600 cursor-pointer py-1.5 transition-colors"}>
+                        <Newspaper size={18}/> <span>Articles</span>
+                    </li>
+                </ul>
+            </div>
         </aside>
     );
 }

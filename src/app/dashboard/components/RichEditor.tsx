@@ -74,7 +74,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         `p-2 rounded hover:bg-gray-200 ${isActive ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`;
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 h-[calc(100vh-168px)] overflow-y-auto">
             <div className="flex flex-wrap gap-1 border border-gray-300 rounded p-2 bg-white">
                 <button onClick={() => editor.chain().focus().toggleBold().run()} className={buttonClass(editor.isActive('bold'))}><Bold className="w-4 h-4" /></button>
                 <button onClick={() => editor.chain().focus().toggleItalic().run()} className={buttonClass(editor.isActive('italic'))}><Italic className="w-4 h-4" /></button>
@@ -103,23 +103,23 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 <button onClick={() => editor.chain().focus().redo().run()} className={buttonClass(false)}><Redo2 className="w-4 h-4" /></button>
             </div>
 
-            {editor.isActive('codeBlock') && (
-                <select
-                    value={editor.getAttributes('codeBlock').language || ''}
-                    onChange={(e) => {
-                        const lang = e.target.value;
-                        editor.chain().focus().setCodeBlock({ language: lang }).run();
-                    }}
-                    className="ml-2 border text-sm px-2 py-1 rounded"
-                >
-                    <option value="">Select Language</option>
-                    {supportedLanguages.map((lang) => (
-                        <option key={lang.value} value={lang.value}>
-                            {lang.label}
-                        </option>
-                    ))}
-                </select>
-            )}
+            {/*{editor.isActive('codeBlock') && (*/}
+            {/*    <select*/}
+            {/*        value={editor.getAttributes('codeBlock').language || ''}*/}
+            {/*        onChange={(e) => {*/}
+            {/*            const lang = e.target.value;*/}
+            {/*            editor.chain().focus().setCodeBlock({ language: lang }).run();*/}
+            {/*        }}*/}
+            {/*        className="ml-2 border text-sm px-2 py-1 rounded"*/}
+            {/*    >*/}
+            {/*        <option value="">Select Language</option>*/}
+            {/*        {supportedLanguages.map((lang) => (*/}
+            {/*            <option key={lang.value} value={lang.value}>*/}
+            {/*                {lang.label}*/}
+            {/*            </option>*/}
+            {/*        ))}*/}
+            {/*    </select>*/}
+            {/*)}*/}
 
             <EditorContent editor={editor} />
         </div>

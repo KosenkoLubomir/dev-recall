@@ -5,7 +5,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     return (
         <div className="min-h-screen flex">
             <Sidebar />
-            <main className="flex-1">{children}</main>
+            <main className="shrink-1 grow max-w-[calc(100vw-256px)]">{children}</main>
             <NewPageModal />
         </div>
     );

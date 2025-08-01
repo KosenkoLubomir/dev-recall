@@ -7,7 +7,7 @@ import PageView from './components/PageView';
 export default function DashboardPage() {
     const { selectedFolder, selectedPage } = useDashboardStore();
     return (
-        <div className="min-h-screen bg-gray-50 px-6 py-8">
+        <div className="max-h-screen bg-gray-50 px-6 py-4 overflow-hidden">
             {selectedPage ? (
                 <PageView />
             ) : selectedFolder ? (

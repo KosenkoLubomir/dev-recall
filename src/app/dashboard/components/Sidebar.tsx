@@ -28,8 +28,8 @@ export default function Sidebar() {
     };
 
     return (
-        <aside className="w-64 bg-gray-100 border-r border-gray-200 p-4 hidden md:block">
-            <div className={"mb-4 pb-4 border-b border-gray-300"}>
+        <aside className="w-64 grow-0 shrink-0 bg-gray-100 border-r border-gray-200 p-4 hidden md:block">
+            <div className={"mb-4 pb-4 border-b border-gray-300 mt-[1px]"}>
                 <Logo view={"horizontal"} />
             </div>
 

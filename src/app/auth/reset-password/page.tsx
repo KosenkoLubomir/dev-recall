@@ -1,7 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import Logo from "@/components/Logo";
+import Button from "@/components/Button";
+import Link from "next/link";
 
 export default function ResetPasswordPage() {
     const supabase = createClientComponentClient();
@@ -29,6 +32,10 @@ export default function ResetPasswordPage() {
     return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
             <form onSubmit={handleReset} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
+
                 <h1 className="text-2xl font-semibold mb-4">Reset Your Password</h1>
 
                 {status === 'success' && (
@@ -42,16 +49,16 @@ export default function ResetPasswordPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border px-3 py-2 rounded mb-4 focus:outline-none focus:ring"
+                    className="w-full border px-3 py-2 rounded mb-2 focus:outline-none border-gray-300 focus:border-blue-500"
                 />
+                <p className={"text-sm text-gray-500 mb-6 text-right"}>
+                    <span className="text-sm text-gray-500">Go back to </span>
+                    <Link href="/auth/login" className="text-blue-600 hover:underline">Login</Link>
+                </p>
 
-                <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-                >
-                    {status === 'loading' ? 'Sending...' : 'Send Reset Link'}
-                </button>
+                <div className={"text-center"}>
+                    <Button type={"submit"} view={"primary"} disabled={status === 'loading'}>{status === 'loading' ? 'Sending...' : 'Send Reset Link'}</Button>
+                </div>
             </form>
         </div>
     );

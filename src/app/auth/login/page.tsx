@@ -61,7 +61,7 @@ export default function SignInPage() {
                     />
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-2">
                     <label className="block text-sm font-medium mb-1">Password</label>
                     <input
                         type="password"
@@ -72,6 +72,13 @@ export default function SignInPage() {
                         className="w-full border rounded px-3 py-2 focus:outline-none border-gray-300 focus:border-blue-500"
                     />
                 </div>
+
+                <p className="mb-6 text-right text-sm">
+                    Forgot password?
+                    <Link href="/auth/reset-password" className="text-blue-600 ml-2 hover:underline">
+                        Reset it here
+                    </Link>
+                </p>
 
                 <div className={"text-center"}>
                     <Button type={"submit"} view={"primary"} disabled={loading}>{loading ? 'Signing in...' : 'Sign In'}</Button>

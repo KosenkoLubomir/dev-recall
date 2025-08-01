@@ -10,6 +10,7 @@ import {
     Users,
     PenSquare,
 } from 'lucide-react';
+import Link from "next/link";
 
 export default function LandingPage() {
 
@@ -163,8 +164,7 @@ export default function LandingPage() {
             <footer className="bg-stone-900 text-white px-6 py-6 text-center text-sm">
                 <p className={"mb-1"}>&copy; 2025 DevRecall. Built for developers who never stop learning.</p>
                 <p className="ml-2">
-                    <a href="/privacy" className="text-blue-400 hover:underline">Privacy Policy</a> |
-                    <a href="/terms" className="text-blue-400 hover:underline ml-2">Terms of Service</a>
+                    <Link href="/privacy" className="text-blue-400 hover:underline">Privacy Policy</Link> | <Link href="/terms" className="text-blue-400 hover:underline">Terms of Service</Link>
                 </p>
             </footer>
         </div>

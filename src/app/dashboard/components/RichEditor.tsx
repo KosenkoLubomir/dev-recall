@@ -12,9 +12,9 @@ import TaskItem from '@tiptap/extension-task-item';
 import Heading from '@tiptap/extension-heading';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { common, createLowlight } from 'lowlight';
-import js from 'highlight.js/lib/languages/javascript';
-import ts from 'highlight.js/lib/languages/typescript';
-import bash from 'highlight.js/lib/languages/bash';
+// import js from 'highlight.js/lib/languages/javascript';
+// import ts from 'highlight.js/lib/languages/typescript';
+// import bash from 'highlight.js/lib/languages/bash';
 
 import {
     Bold, Italic, Strikethrough, List, ListOrdered, Heading1, Heading2, Heading3,
@@ -25,15 +25,15 @@ import {
 import '@/styles/editor.css';
 
 const lowlight = createLowlight(common);
-lowlight.register('js', js);
-lowlight.register('ts', ts);
-lowlight.register('bash', bash);
+// lowlight.register('js', js);
+// lowlight.register('ts', ts);
+// lowlight.register('bash', bash);
 
-const supportedLanguages = [
-    { label: 'JavaScript', value: 'js' },
-    { label: 'TypeScript', value: 'ts' },
-    { label: 'Bash', value: 'bash' },
-];
+// const supportedLanguages = [
+//     { label: 'JavaScript', value: 'js' },
+//     { label: 'TypeScript', value: 'ts' },
+//     { label: 'Bash', value: 'bash' },
+// ];
 
 import { JSONContent } from '@tiptap/react';
 

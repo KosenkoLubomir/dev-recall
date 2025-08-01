@@ -161,7 +161,11 @@ export default function LandingPage() {
             </section>
 
             <footer className="bg-stone-900 text-white px-6 py-6 text-center text-sm">
-                <p>&copy; 2025 DevRecall. Built for developers who never stop learning.</p>
+                <p className={"mb-1"}>&copy; 2025 DevRecall. Built for developers who never stop learning.</p>
+                <p className="ml-2">
+                    <a href="/privacy" className="text-blue-400 hover:underline">Privacy Policy</a> |
+                    <a href="/terms" className="text-blue-400 hover:underline ml-2">Terms of Service</a>
+                </p>
             </footer>
         </div>
     );

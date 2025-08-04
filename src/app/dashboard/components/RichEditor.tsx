@@ -16,6 +16,10 @@ import { common, createLowlight } from 'lowlight';
 // import ts from 'highlight.js/lib/languages/typescript';
 // import bash from 'highlight.js/lib/languages/bash';
 
+import BulletList from '@tiptap/extension-bullet-list';
+import OrderedList from '@tiptap/extension-ordered-list';
+import ListItem from '@tiptap/extension-list-item';
+
 import {
     Bold, Italic, Strikethrough, List, ListOrdered, Heading1, Heading2, Heading3,
     Quote, Code, Code2, Image as ImageIcon, AlignLeft, AlignCenter, AlignRight,
@@ -45,7 +49,18 @@ type RichEditorProps = {
 export default function RichEditor({ content, onChange }: RichEditorProps) {
     const editor = useEditor({
         extensions: [
-            StarterKit,
+            StarterKit.configure({
+                bulletList: false,
+                orderedList: false,
+                listItem: false,
+                heading: false,
+                underline: false,
+                codeBlock: false,
+                link: false,
+            }),
+            BulletList,
+            OrderedList,
+            ListItem,
             Underline,
             Link,
             Image,

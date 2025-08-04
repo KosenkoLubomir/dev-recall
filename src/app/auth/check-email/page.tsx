@@ -1,7 +1,13 @@
+import Logo from "@/components/Logo";
+import React from "react";
+
 export default function CheckEmailPage() {
     return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
             <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md text-center">
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
                 <h2 className="text-2xl font-bold mb-4">Check your email</h2>
                 <p className="text-gray-600 mb-6">
                     We have sent a confirmation email to your inbox.

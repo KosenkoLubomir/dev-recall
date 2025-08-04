@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronDownIcon, ChevronRightIcon, FolderIcon, PlusIcon } from 'lucide-react';
 import { useDashboardStore } from '@/stores/useDashboardStore';
 import { Folder } from '@/types/folder';
-import { usePages } from '@/hooks/usePages'; // ← still needed!
+import { usePages } from '@/hooks/usePages';
 
 type Props = {
     folder: Folder;
@@ -16,9 +16,6 @@ export default function FolderItem({ folder }: Props) {
     const expanded = expandedFolders[folder.id] ?? false;
 
     const { pages, loading } = usePages(expanded ? folder.id : null);
-
-    console.log("Selected Folder:", selectedFolder);
-    console.log("folder.id:", id);
 
     const handleFolderClick = () => {
         if (pages_count > 0) {
@@ -49,6 +46,7 @@ export default function FolderItem({ folder }: Props) {
                     onClick={(e) => {
                         e.stopPropagation();
                         setCreatingForFolder(id);
+                        setSelectedFolder(id);
                     }}
                 />
             </div>

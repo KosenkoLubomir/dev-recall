@@ -15,12 +15,12 @@ export default function FolderView() {
             ) : pages.length === 0 ? (
                 <p className="text-gray-500">No pages yet</p>
             ) : (
-                <div className="space-y-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {pages.map((page) => (
                         <div
                             key={page.id}
                             onClick={() => setSelectedPage(page.id)}
-                            className="p-3 bg-white border rounded shadow hover:bg-gray-50 cursor-pointer"
+                            className="p-4 bg-white rounded-lg shadow hover:shadow-md transition cursor-pointer"
                         >
                             {page.title || 'Untitled Page'}
                         </div>

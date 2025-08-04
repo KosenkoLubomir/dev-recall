@@ -52,7 +52,7 @@ export default function FolderItem({ folder }: Props) {
             </div>
 
             {expanded && (
-                <ul className="pl-8 text-sm text-gray-600">
+                <ul className="pl-7 text-sm text-gray-600">
                     {loading ? (
                         <li className="italic text-gray-400">Loading pages...</li>
                     ) : pages.length > 0 ? (

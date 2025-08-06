@@ -1,7 +1,13 @@
 import typography from '@tailwindcss/typography';
 
 module.exports = {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@shadcn/ui/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {},
   },

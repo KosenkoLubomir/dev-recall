@@ -12,6 +12,11 @@ import TaskItem from '@tiptap/extension-task-item';
 import Heading from '@tiptap/extension-heading';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import { common, createLowlight } from 'lowlight';
+import {Table} from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+
 // import js from 'highlight.js/lib/languages/javascript';
 // import ts from 'highlight.js/lib/languages/typescript';
 // import bash from 'highlight.js/lib/languages/bash';
@@ -23,8 +28,15 @@ import ListItem from '@tiptap/extension-list-item';
 import {
     Bold, Italic, Strikethrough, List, ListOrdered, Heading1, Heading2, Heading3,
     Quote, Code, Code2, Image as ImageIcon, AlignLeft, AlignCenter, AlignRight,
-    CheckSquare, Link as LinkIcon, Undo2, Redo2,
+    CheckSquare, Link as LinkIcon, Undo2, Redo2, Table as TableIcon, BetweenHorizontalStart,
+    BetweenVerticalEnd
 } from 'lucide-react';
+
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 import '@/styles/editor.css';
 
@@ -69,6 +81,12 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
             Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
             TextAlign.configure({ types: ['heading', 'paragraph'] }),
             CodeBlockLowlight.configure({ lowlight }),
+            Table.configure({
+                resizable: true,
+            }),
+            TableRow,
+            TableHeader,
+            TableCell,
         ],
         content,
         editorProps: {
@@ -89,34 +107,201 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         `p-2 rounded hover:bg-gray-200 ${isActive ? 'bg-blue-100 text-blue-600' : 'text-gray-600'}`;
 
     return (
-        <div className="space-y-4 h-[calc(100vh-168px)] overflow-y-auto">
+        <div className="space-y-4 relative">
             <div className="flex flex-wrap gap-1 border border-gray-300 rounded p-2 bg-white">
-                <button onClick={() => editor.chain().focus().toggleBold().run()} className={buttonClass(editor.isActive('bold'))}><Bold className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleItalic().run()} className={buttonClass(editor.isActive('italic'))}><Italic className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleStrike().run()} className={buttonClass(editor.isActive('strike'))}><Strikethrough className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={buttonClass(editor.isActive('bulletList'))}><List className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={buttonClass(editor.isActive('orderedList'))}><ListOrdered className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleTaskList().run()} className={buttonClass(editor.isActive('taskList'))}><CheckSquare className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={buttonClass(editor.isActive('heading', { level: 1 }))}><Heading1 className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={buttonClass(editor.isActive('heading', { level: 2 }))}><Heading2 className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={buttonClass(editor.isActive('heading', { level: 3 }))}><Heading3 className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleBlockquote().run()} className={buttonClass(editor.isActive('blockquote'))}><Quote className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleCode().run()} className={buttonClass(editor.isActive('code'))}><Code2 className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={buttonClass(editor.isActive('codeBlock'))}><Code className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().setTextAlign('left').run()} className={buttonClass(editor.isActive({ textAlign: 'left' }))}><AlignLeft className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().setTextAlign('center').run()} className={buttonClass(editor.isActive({ textAlign: 'center' }))}><AlignCenter className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().setTextAlign('right').run()} className={buttonClass(editor.isActive({ textAlign: 'right' }))}><AlignRight className="w-4 h-4" /></button>
-                <button onClick={() => {
-                    const url = window.prompt('Enter URL');
-                    if (url) editor.chain().focus().setLink({ href: url }).run();
-                }} className={buttonClass(editor.isActive('link'))}><LinkIcon className="w-4 h-4" /></button>
-                <button onClick={() => {
-                    const url = window.prompt('Image URL');
-                    if (url) editor.chain().focus().setImage({ src: url }).run();
-                }} className={buttonClass(false)}><ImageIcon className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().undo().run()} className={buttonClass(false)}><Undo2 className="w-4 h-4" /></button>
-                <button onClick={() => editor.chain().focus().redo().run()} className={buttonClass(false)}><Redo2 className="w-4 h-4" /></button>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleBold().run()} className={buttonClass(editor.isActive('bold'))}><Bold className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Bold</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleItalic().run()} className={buttonClass(editor.isActive('italic'))}><Italic className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Italic</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleStrike().run()} className={buttonClass(editor.isActive('strike'))}><Strikethrough className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Strike</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={buttonClass(editor.isActive('bulletList'))}><List className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Bullet List</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={buttonClass(editor.isActive('orderedList'))}><ListOrdered className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Ordered List</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleTaskList().run()} className={buttonClass(editor.isActive('taskList'))}><CheckSquare className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Task List</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={buttonClass(editor.isActive('heading', { level: 1 }))}><Heading1 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Heading 1</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={buttonClass(editor.isActive('heading', { level: 2 }))}><Heading2 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Heading 2</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={buttonClass(editor.isActive('heading', { level: 3 }))}><Heading3 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Heading 3</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleBlockquote().run()} className={buttonClass(editor.isActive('blockquote'))}><Quote className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Blockquote</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleCode().run()} className={buttonClass(editor.isActive('code'))}><Code2 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Code style</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={buttonClass(editor.isActive('codeBlock'))}><Code className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Code Block</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().setTextAlign('left').run()} className={buttonClass(editor.isActive({ textAlign: 'left' }))}><AlignLeft className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Text Align Left</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().setTextAlign('center').run()} className={buttonClass(editor.isActive({ textAlign: 'center' }))}><AlignCenter className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Text Align Center</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().setTextAlign('right').run()} className={buttonClass(editor.isActive({ textAlign: 'right' }))}><AlignRight className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Text Align Right</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => {
+                            const url = window.prompt('Enter URL');
+                            if (url) editor.chain().focus().setLink({ href: url }).run();
+                        }} className={buttonClass(editor.isActive('link'))}><LinkIcon className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Add Link</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => {
+                            const url = window.prompt('Image URL');
+                            if (url) editor.chain().focus().setImage({ src: url }).run();
+                        }} className={buttonClass(false)}><ImageIcon className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Add Image</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().undo().run()} className={buttonClass(false)}><Undo2 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Undo</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().redo().run()} className={buttonClass(false)}><Redo2 className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Redo</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} className={buttonClass(false)}><TableIcon className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Add Table</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().addRowAfter().run()} className={buttonClass(false)}><BetweenHorizontalStart className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Add Row</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <button onClick={() => editor.chain().focus().addColumnAfter().run()} className={buttonClass(false)}><BetweenVerticalEnd className="w-4 h-4" /></button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>Add Column</p>
+                    </TooltipContent>
+                </Tooltip>
             </div>
+
+            {/*<button*/}
+            {/*    onClick={() => editor.chain().focus().deleteRow().run()}*/}
+            {/*    className={buttonClass(false)}*/}
+            {/*>❌ Row</button>*/}
+
+            {/*<button*/}
+            {/*    onClick={() => editor.chain().focus().deleteColumn().run()}*/}
+            {/*    className={buttonClass(false)}*/}
+            {/*>❌ Col</button>*/}
 
             {/*{editor.isActive('codeBlock') && (*/}
             {/*    <select*/}
@@ -136,7 +321,9 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
             {/*    </select>*/}
             {/*)}*/}
 
-            <EditorContent editor={editor} />
+            <div className={"h-[calc(100vh-234px)] overflow-y-auto"}>
+                <EditorContent editor={editor} />
+            </div>
         </div>
     );
 }

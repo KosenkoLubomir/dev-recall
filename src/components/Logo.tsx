@@ -20,7 +20,7 @@ const Logo = (
                 width={standard ? 34 : 24}
                 height={standard ? 40 : 30}
             />
-            <h1 className={`mb-0 leading-5 text-left font-thin ${standard ? "text-2xl" : "text-xl"}`}>
+            <h1 className={`mb-0 leading-5 text-left font-light ${standard ? "text-2xl" : "text-xl"}`}>
                 <span className={"text-indigo-700"}>Dev</span>
                 {standard && <br/>}
                 <span>Recall</span>

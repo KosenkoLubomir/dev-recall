@@ -117,7 +117,7 @@ export default function NewPageModal() {
                 <div className="flex justify-between space-x-2">
                     <Button onClick={() => setCreatingForFolder(null)} view={"secondary"} disabled={saving}>Cancel</Button>
                     <div className={"flex items-center gap-2"}>
-                        <Button onClick={handleSave} view={"primary"} disabled={generating || saving}>{saving ? 'Saving...' : 'Save as Blank'}</Button>
+                        <Button onClick={() => handleSave()} view={"primary"} disabled={generating || saving}>{saving ? 'Saving...' : 'Save as Blank'}</Button>
                         <Button onClick={handleAIGeneration} view={"primary"} disabled={generating || saving}>{saving || generating ? 'Generating...' : 'Generate by AI'}</Button>
                     </div>
                 </div>

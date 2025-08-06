@@ -30,11 +30,11 @@ export default function FoldersList() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-2">Welcome{user.name ? `, ${user.email}` : ''}</h1>
-            <p className="text-gray-600 mb-6">Your personalized interview prep space</p>
+            <h1 className="text-2xl font-bold mb-2">Welcome {user.name || user.email || ''}!</h1>
+            <p className="text-gray-600 mb-6">Your personalized tech knowledge space</p>
 
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold">My Folders</h2>
+                <h2 className="text-xl font-semibold">Folders</h2>
             </div>
 
             {loading ? (

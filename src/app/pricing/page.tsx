@@ -7,10 +7,7 @@ export default function PricingPage() {
     return (
         <main className="max-w-4xl mx-auto py-16 px-4">
             <div className={"text-center"}>
-                <Logo
-                    classes={"mb-6 mx-auto inline-flex"}
-                    href={"/"}
-                />
+                <Logo classes={"mb-6 justify-center inline-flex"}/>
             </div>
 
             <h1 className="text-4xl font-bold text-center mb-4">Pricing</h1>

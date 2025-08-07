@@ -1,11 +1,14 @@
 import Logo from "@/components/Logo";
+import React from "react";
 
 export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen flex items-center justify-center p-8 bg-gray-50">
             <div className="prose max-w-3xl mx-auto text-gray-700">
-                <Logo view={"horizontal"} classes={"mb-6"} />
-                <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
+                <h1 className="text-2xl text-center font-bold mb-4">Privacy Policy</h1>
                 <p className="text-gray-600 mb-2">Effective Date: August 1, 2025</p>
                 <p className="text-gray-600 mb-6">Last Updated: August 1, 2025</p>
                 <p>

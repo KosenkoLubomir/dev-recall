@@ -1,11 +1,14 @@
 import Logo from "@/components/Logo";
+import React from "react";
 
 export default function TermsAndConditions() {
     return (
         <div className="min-h-screen flex items-center justify-center p-8 bg-gray-50">
             <div className="prose max-w-3xl mx-auto text-gray-700">
-                <Logo view={"horizontal"} classes={"mb-6"} />
-                <h1 className="text-2xl font-bold mb-4">Terms and Conditions</h1>
+                <div className={"text-center"}>
+                    <Logo classes={"mb-6 justify-center inline-flex"}/>
+                </div>
+                <h1 className="text-2xl text-center font-bold mb-4">Terms and Conditions</h1>
                 <p className="text-gray-600 mb-2">Effective Date: August 1, 2025</p>
                 <p className="text-gray-600 mb-6">Last Updated: August 1, 2025</p>
                 <p>
@@ -51,7 +54,28 @@ export default function TermsAndConditions() {
                     We may update these Terms at any time. Continued use of the service means you accept the updated Terms.
                 </p>
 
-                <h2 className="text-xl font-semibold mt-6">9. Contact</h2>
+                <h2 className="text-xl font-semibold mt-6">9. Refund Policy</h2>
+                <ul className="list-disc ml-6">
+                    <li>
+                        If you purchase a paid subscription (such as a PRO plan), you are eligible for a full refund within 7 days of the initial purchase - no questions asked.
+                    </li>
+                    <li>
+                        After 7 days, all payments are non-refundable, including renewals and recurring charges.
+                    </li>
+                    <li>
+                        If your payment fails and we are unable to collect it within 7 days, your PRO access will be suspended automatically.
+                    </li>
+                    <li>
+                        To request a refund or cancel your subscription, please contact us at <b>support@devrecall.com</b>.
+                    </li>
+                    <li>
+                        You can also cancel your subscription at any time through your account settings.<br/>
+                        Cancellation will prevent future charges, but does not retroactively refund previous payments.<br/>
+                        Your PRO access will remain active until the end of your current billing period.
+                    </li>
+                </ul>
+
+                <h2 className="text-xl font-semibold mt-6">10. Contact</h2>
                 <p>
                     Questions? Reach out at
                     <a href="mailto:support@devrecall.com" className="text-blue-600 underline ml-1">support@devrecall.com</a>.

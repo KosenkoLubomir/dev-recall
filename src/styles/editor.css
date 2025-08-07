@@ -13,9 +13,9 @@
     margin-top: 0.75em;
   }
 
-  h1 { font-size: 1.875rem; font-weight: 700; }
-  h2 { font-size: 1.5rem; font-weight: 600; }
-  h3 { font-size: 1.25rem; font-weight: 600; }
+  h1 { font-size: 1.5rem; font-weight: 700; }
+  h2 { font-size: 1.25rem; font-weight: 600; }
+  h3 { font-size: 1.15rem; font-weight: 600; }
 
   blockquote {
     padding-left: 1rem;

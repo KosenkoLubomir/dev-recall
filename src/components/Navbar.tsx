@@ -15,6 +15,7 @@ const Navbar = () => {
             <nav className="flex gap-6 text-md font-medium">
                 <Link href="/how-it-works" className={"font-semibold hover:text-blue-500"}>How It Works</Link>
                 <Link href="/about" className={"font-semibold hover:text-blue-500"}>About</Link>
+                <Link href="/pricing" className={"font-semibold hover:text-blue-500"}>Pricing</Link>
             </nav>
 
             { user?.id ? ( <>

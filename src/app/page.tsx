@@ -51,7 +51,7 @@ export default function LandingPage() {
         {
             icon: <BrainCircuit className="w-8 h-8 text-blue-600" />,
             title: 'Self-Check Quizzes',
-            desc: 'Test your understanding with custom questions',
+            desc: 'Test yourself with custom questions',
         },
         {
             icon: <BellRing className="w-8 h-8 text-blue-600" />,

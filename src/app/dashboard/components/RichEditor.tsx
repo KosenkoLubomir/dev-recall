@@ -111,7 +111,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
             <div className="flex flex-wrap gap-1 border border-gray-300 rounded p-2 bg-white">
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleBold().run()} className={buttonClass(editor.isActive('bold'))}><Bold className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleBold().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('bold'))}><Bold className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Bold</p>
@@ -119,7 +119,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleItalic().run()} className={buttonClass(editor.isActive('italic'))}><Italic className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleItalic().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('italic'))}><Italic className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Italic</p>
@@ -127,7 +127,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleStrike().run()} className={buttonClass(editor.isActive('strike'))}><Strikethrough className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleStrike().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('strike'))}><Strikethrough className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Strike</p>
@@ -135,7 +135,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleBulletList().run()} className={buttonClass(editor.isActive('bulletList'))}><List className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleBulletList().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('bulletList'))}><List className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Bullet List</p>
@@ -143,7 +143,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleOrderedList().run()} className={buttonClass(editor.isActive('orderedList'))}><ListOrdered className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('orderedList'))}><ListOrdered className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Ordered List</p>
@@ -151,7 +151,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleTaskList().run()} className={buttonClass(editor.isActive('taskList'))}><CheckSquare className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleTaskList().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('taskList'))}><CheckSquare className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Task List</p>
@@ -159,7 +159,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={buttonClass(editor.isActive('heading', { level: 1 }))}><Heading1 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('heading', { level: 1 }))}><Heading1 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Heading 1</p>
@@ -167,7 +167,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={buttonClass(editor.isActive('heading', { level: 2 }))}><Heading2 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('heading', { level: 2 }))}><Heading2 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Heading 2</p>
@@ -175,7 +175,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={buttonClass(editor.isActive('heading', { level: 3 }))}><Heading3 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('heading', { level: 3 }))}><Heading3 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Heading 3</p>
@@ -183,7 +183,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleBlockquote().run()} className={buttonClass(editor.isActive('blockquote'))}><Quote className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('blockquote'))}><Quote className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Blockquote</p>
@@ -191,7 +191,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleCode().run()} className={buttonClass(editor.isActive('code'))}><Code2 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleCode().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('code'))}><Code2 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Code style</p>
@@ -199,7 +199,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={buttonClass(editor.isActive('codeBlock'))}><Code className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().toggleCodeBlock().run()} className={`block cursor-pointer ` + buttonClass(editor.isActive('codeBlock'))}><Code className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Code Block</p>
@@ -207,7 +207,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().setTextAlign('left').run()} className={buttonClass(editor.isActive({ textAlign: 'left' }))}><AlignLeft className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().setTextAlign('left').run()} className={`block cursor-pointer ` + buttonClass(editor.isActive({ textAlign: 'left' }))}><AlignLeft className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Text Align Left</p>
@@ -215,7 +215,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().setTextAlign('center').run()} className={buttonClass(editor.isActive({ textAlign: 'center' }))}><AlignCenter className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().setTextAlign('center').run()} className={`block cursor-pointer ` + buttonClass(editor.isActive({ textAlign: 'center' }))}><AlignCenter className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Text Align Center</p>
@@ -223,7 +223,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().setTextAlign('right').run()} className={buttonClass(editor.isActive({ textAlign: 'right' }))}><AlignRight className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().setTextAlign('right').run()} className={`block cursor-pointer ` + buttonClass(editor.isActive({ textAlign: 'right' }))}><AlignRight className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Text Align Right</p>
@@ -231,10 +231,10 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => {
+                        <span onClick={() => {
                             const url = window.prompt('Enter URL');
                             if (url) editor.chain().focus().setLink({ href: url }).run();
-                        }} className={buttonClass(editor.isActive('link'))}><LinkIcon className="w-4 h-4" /></button>
+                        }} className={`block cursor-pointer ` + buttonClass(editor.isActive('link'))}><LinkIcon className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Add Link</p>
@@ -242,10 +242,10 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => {
+                        <span onClick={() => {
                             const url = window.prompt('Image URL');
                             if (url) editor.chain().focus().setImage({ src: url }).run();
-                        }} className={buttonClass(false)}><ImageIcon className="w-4 h-4" /></button>
+                        }} className={`block cursor-pointer ` + buttonClass(false)}><ImageIcon className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Add Image</p>
@@ -253,7 +253,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().undo().run()} className={buttonClass(false)}><Undo2 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().undo().run()} className={`block cursor-pointer ` + buttonClass(false)}><Undo2 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Undo</p>
@@ -261,7 +261,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().redo().run()} className={buttonClass(false)}><Redo2 className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().redo().run()} className={`block cursor-pointer ` + buttonClass(false)}><Redo2 className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Redo</p>
@@ -269,7 +269,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} className={buttonClass(false)}><TableIcon className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} className={`block cursor-pointer ` + buttonClass(false)}><TableIcon className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Add Table</p>
@@ -277,7 +277,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().addRowAfter().run()} className={buttonClass(false)}><BetweenHorizontalStart className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().addRowAfter().run()} className={`block cursor-pointer ` + buttonClass(false)}><BetweenHorizontalStart className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Add Row</p>
@@ -285,7 +285,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
                 </Tooltip>
                 <Tooltip>
                     <TooltipTrigger>
-                        <button onClick={() => editor.chain().focus().addColumnAfter().run()} className={buttonClass(false)}><BetweenVerticalEnd className="w-4 h-4" /></button>
+                        <span onClick={() => editor.chain().focus().addColumnAfter().run()} className={`block cursor-pointer ` + buttonClass(false)}><BetweenVerticalEnd className="w-4 h-4" /></span>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Add Column</p>

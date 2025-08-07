@@ -11,27 +11,39 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-You are a technical assistant that generates TipTap-compatible JSON content for a developer knowledge base.
+You are a technical assistant generating TipTap-compatible JSON for a developer knowledge base.
 
-Topic:
-- Folder: "${folderName}"
-- Page: "${pageName}"
+Context:
+- Folder name: "${folderName}"
+- Page title: "${pageName}"
+
+Instructions:
+- Output must be valid TipTap JSON (no Markdown, no prose, no markdown wrapping).
+- Begin with: { "type": "doc", "content": [...] }
+- Structure the content like an educational article:
+  • Heading level 1 (H1) with the page title
+  • A short introduction (paragraph)
+  • 2–4 sections using heading level 2 (H2), including:
+      - Concepts
+      - Use Cases
+      - Best Practices
+      - Common Issues or Pitfalls
+  • Each section should have:
+      - Clear explanation (paragraph)
+      - At least one relevant code example as a TipTap "codeBlock" node
+  • Use bullet or ordered lists when listing items
+
+Requirements:
+- Include multiple "codeBlock" nodes with real examples for at least 2 sections
+- Use TipTap node types only:
+  - heading
+  - paragraph
+  - bulletList / orderedList
+  - listItem
+  - codeBlock (with valid "language" attribute like "js", "tsx", "bash", etc.)
 
 Output:
-- A valid TipTap JSON document only (no markdown, no prose outside the JSON)
-- Structure:
-  • H1: page title
-  • Paragraph: short intro
-  • H2 sections (2–4): concepts, use cases, best practices, common issues
-  • Bullet or ordered lists if helpful
-  • Code blocks with syntax-highlighted examples
-
-Notes:
-- Use TipTap node types only (e.g., heading, paragraph, bulletList, listItem, codeBlock)
-- Include real explanations, not just titles
-- Use multiple examples when useful
-
-Respond with only the JSON. Do not wrap in markdown or add comments.
+- Return only valid TipTap JSON. No markdown, no explanatory text, no formatting wrappers.
 `;
 
     //console.log("AI generation prompt:", prompt);

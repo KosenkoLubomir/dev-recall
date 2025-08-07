@@ -101,7 +101,7 @@ export default function PageView() {
                 <RichEditor key={selectedPage} content={content} onChange={setContent} />
             )}
 
-            <div className={"flex items-center justify-between pt-4 border-t-1 border-gray-200"}>
+            <div className={"flex items-center justify-between pt-4 border-t-1 border-gray-300"}>
                 <Button onClick={handleSave} view={"primary"} disabled={loading}>{saving ? 'Saving...' : 'Save'}</Button>
                 <Button onClick={handleDelete} view={"danger"} disabled={loading}>{saving ? 'Deleting...' : 'Delete Page'}</Button>
             </div>

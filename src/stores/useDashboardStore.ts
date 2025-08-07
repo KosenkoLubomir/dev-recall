@@ -7,6 +7,8 @@ type DashboardState = {
     selectedFolder: string | null;
     selectedPage: string | null;
     folders: Folder[];
+    creatingFolder: boolean | null;
+    setCreatingFolder: (creatingFolder: boolean | null) => void;
     creatingForFolder: string | null;
     pagesByFolder: Record<string, Page[]>;
     setFolders: (folders: Folder[]) => void;
@@ -26,6 +28,8 @@ export const useDashboardStore = create<DashboardState>((set) => ({
     expandedFolders: {},
     pagesByFolder: {},
     creatingForFolder: null,
+    creatingFolder: false,
+    setCreatingFolder: (creatingFolder) => set({ creatingFolder }),
     setFolders: (folders) => set({ folders }),
     setSelectedFolder: (folderId) => set({ selectedFolder: folderId }),
     setSelectedPage: (pageId) => set({ selectedPage: pageId }),

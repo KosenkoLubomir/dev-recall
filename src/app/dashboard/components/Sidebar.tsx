@@ -12,10 +12,11 @@ import {
 import {useDashboardStore} from "@/stores/useDashboardStore";
 import FolderItem from './FolderItem';
 import Logo from "@/components/Logo";
+import NewFolderModal from "@/app/dashboard/components/NewFolderModal";
 
 export default function Sidebar() {
     const { user, reset } = useUserStore();
-    const { folders } = useDashboardStore();
+    const { folders, setCreatingFolder } = useDashboardStore();
     const supabase = createClientComponentClient();
     const router = useRouter();
 
@@ -37,7 +38,7 @@ export default function Sidebar() {
                 <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                         <h2 className="text-lg font-semibold mb-0">Your Stack</h2>
-                        <button className="text-blue-500 text-sm cursor-pointer px-2 py-1 rounded-md hover:bg-blue-100">
+                        <button onClick={()=> setCreatingFolder(true)} className="text-blue-500 text-sm cursor-pointer px-2 py-1 rounded-md hover:bg-blue-100">
                             + New Folder
                         </button>
                     </div>
@@ -105,6 +106,7 @@ export default function Sidebar() {
                     </>
                 )}
             </div>
+            <NewFolderModal/>
         </aside>
     );
 }

@@ -3,6 +3,6 @@ export type Folder = {
     name: string;
     user_id: string;
     stack_item_id: string | null;
-    created_at: string;
+    created_at: string | null;
     pages_count: number;
 };

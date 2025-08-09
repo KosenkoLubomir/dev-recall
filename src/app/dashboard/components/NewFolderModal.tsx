@@ -5,6 +5,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useDashboardStore } from '@/stores/useDashboardStore';
 import {useUserStore} from "@/stores/useUserStore";
 import Button from "@/components/Button";
+import {MAX_FOLDERS} from '@/constants/limits';
 
 export default function NewFolderModal() {
     const supabase = createClientComponentClient();
@@ -17,7 +18,7 @@ export default function NewFolderModal() {
     } = useDashboardStore();
 
     const inputRef = useRef<HTMLInputElement>(null);
-    const {user} = useUserStore();
+    const {user, userPlan} = useUserStore();
     const [name, setName] = useState('');
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
@@ -41,6 +42,15 @@ export default function NewFolderModal() {
         }
 
         setSaving(true);
+
+        const { count } = await supabase
+            .from('folders')
+            .select('*', { count: 'exact', head: true })
+            .eq('user_id', user.id);
+
+        if (count && count >= MAX_FOLDERS(userPlan.plan)) {
+            return setError("Folder limit reached");
+        }
 
         const { data, error: insertError } = await supabase
             .from('folders')

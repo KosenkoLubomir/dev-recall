@@ -30,6 +30,18 @@ function PricingCard({ title, price, features, cta, highlight }: PricingCardProp
             setLoading(false);
         }, 1000);
     }
+
+    // const { data } = await fetch('/api/create-checkout', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //         user_id: supabase.auth.getUser().id,
+    //         price_id: 'pri_XXXX' // Paddle price ID
+    //     })
+    // }).then(res => res.json());
+    //
+    // window.location.href = data.url; // redirect to Paddle checkout
+
     return (
         <div className={`border flex flex-col justify-between rounded-lg p-6 shadow-sm ${highlight ? 'border-blue-500' : 'border-gray-200'}`}>
             <div>

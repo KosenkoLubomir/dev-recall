@@ -6,6 +6,7 @@ import { useDashboardStore } from '@/stores/useDashboardStore';
 import {useUserStore} from "@/stores/useUserStore";
 import Button from "@/components/Button";
 import { JSONContent } from '@tiptap/react';
+import {MAX_PAGES_BY_FOLDER} from "@/constants/limits";
 
 export default function NewPageModal() {
     const supabase = createClientComponentClient();
@@ -20,7 +21,7 @@ export default function NewPageModal() {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const {user} = useUserStore();
+    const {user, userPlan} = useUserStore();
 
     const [name, setName] = useState('');
     const [saving, setSaving] = useState(false);
@@ -46,6 +47,15 @@ export default function NewPageModal() {
         }
 
         setSaving(true);
+
+        const { count } = await supabase
+            .from('pages')
+            .select('*', { count: 'exact', head: true })
+            .eq('folder_id', selectedFolder);
+
+        if (count && count >= MAX_PAGES_BY_FOLDER(userPlan.plan)) {
+            return setError("Page limit reached");
+        }
 
         const { data, error: insertError } = await supabase
             .from('pages')

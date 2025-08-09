@@ -14,8 +14,11 @@ export const metadata: Metadata = {
     description: "Your personal interview prep space — structured, focused, and made for developers.",
     icons: {
         icon: [
+            "/favicon.ico",
             { url: "/images/favicon.png", type: "image/png" },
-            { url: "/images/dev-recall-logo.png", rel: "shortcut icon", type: "image/png" },
+        ],
+        shortcut: [
+            { url: "/images/dev-recall-logo.png", type: "image/png" },
         ],
     },
     keywords: [

@@ -51,7 +51,7 @@ export default function FoldersList() {
                         >
                             <h3 className="font-medium text-lg">{folder.name}</h3>
                             <p className="text-sm text-gray-400">
-                                Created: {new Date(folder.created_at).toLocaleDateString()}
+                                Created: {new Date(folder.created_at ? folder.created_at : "").toLocaleDateString()}
                             </p>
                         </div>
                     ))}

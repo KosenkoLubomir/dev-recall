@@ -6,7 +6,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function UserProvider({ children }: { children: React.ReactNode }) {
     const supabase = createClientComponentClient();
-    const { setUser, user } = useUserStore();
+    const { setUser, user, setUserPlan } = useUserStore();
 
     useEffect(() => {
         const handleUser = async () => {
@@ -33,6 +33,24 @@ export default function UserProvider({ children }: { children: React.ReactNode }
                 console.error('Failed to fetch user:', fetchError.message);
             } else if (dbUser) {
                 setUser(dbUser);
+
+                const {data: plan, error: planError} = await supabase
+                    .from('user_subscriptions')
+                    .select('*')
+                    .eq('user_id', dbUser.id)
+                    .single();
+                if (planError) {
+                    console.log('Failed to fetch user plan:', planError.message);
+                } else if (plan) {
+                    setUserPlan({
+                        plan: plan.plan,
+                        status: plan.status,
+                        start_date: plan.start_date,
+                        updated_at: plan.updated_at,
+                        current_period_end: plan.current_period_end,
+                        payment_system_id: plan.payment_system_id || null, // e.g., Stripe subscription ID
+                    });
+                }
             }
         };
 

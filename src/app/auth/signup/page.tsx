@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
 import Link from "next/link";
+import Script from "next/script";
 
 export default function SignUpPage() {
     const router = useRouter();
@@ -15,6 +16,18 @@ export default function SignUpPage() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        // Register the callback so Turnstile can call it
+        if (typeof window === 'undefined') return;
+        /* eslint-disable */
+        (window as any).javascriptCallback = function (token: string) {
+            setTurnstileToken(token);
+        };
+        /* eslint-enable */
+    }, []);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
@@ -23,8 +36,30 @@ export default function SignUpPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+
+        if (!turnstileToken) {
+            setError('Please verify you are human.');
+            return;
+        }
+
         setLoading(true);
 
+        // Send token to your backend for verification
+        const verifyRes = await fetch('/api/verify-turnstile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: turnstileToken }),
+        });
+
+        const verifyData = await verifyRes.json();
+
+        if (!verifyData.success) {
+            setError('Captcha verification failed.');
+            setLoading(false);
+            return;
+        }
+
+        // If captcha passes → continue signup
         const { error } = await supabase.auth.signUp({
             email: form.email,
             password: form.password,
@@ -44,6 +79,11 @@ export default function SignUpPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
+            <Script
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                async
+                defer
+            />
             <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
                 <div className={"text-center"}>
                     <Logo classes={"mb-6 justify-center inline-flex"}/>
@@ -89,8 +129,16 @@ export default function SignUpPage() {
                     />
                 </div>
 
+
+                <div
+                    className="cf-turnstile flex justify-center mb-4"
+                    data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    data-callback="javascriptCallback"
+                ></div>
+
                 <div className={"text-center"}>
-                    <Button type={"submit"} view={"primary"} disabled={loading}>{loading ? 'Signing up...' : 'Sign Up'}</Button>
+                    <Button type={"submit"} view={"primary"}
+                            disabled={loading}>{loading ? 'Signing up...' : 'Sign Up'}</Button>
                     <p className="mt-4 text-sm text-gray-600">
                         Already have an account?{' '}
                         <Link href="/auth/login" className="text-blue-600 hover:underline">

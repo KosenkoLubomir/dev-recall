@@ -1,15 +1,17 @@
 import { create } from 'zustand';
-import { User } from '@/types/user';
+import { User, UserPlan } from '@/types/user';
 import { StackItem } from '@/types/stack_item';
 
 type UserState = {
     user: User;
+    userPlan: UserPlan;
     setUser: (user: User) => void;
     reset: () => void;
     setRole: (role: string) => void;
     setLevel: (level: string) => void;
     setStack: (stack_items: StackItem[]) => void;
     setVisibility: (visibility: 'public' | 'private') => void;
+    setUserPlan: (plan: UserPlan) => void;
 };
 
 export const useUserStore = create<UserState>((set) => ({
@@ -23,7 +25,18 @@ export const useUserStore = create<UserState>((set) => ({
         visibility: 'public',
     },
 
+    userPlan: {
+        plan: 'free',
+        status: 'inactive',
+        start_date: '',
+        updated_at: '',
+        current_period_end: '',
+        payment_system_id: null, // e.g., Stripe subscription ID
+    },
+
     setUser: (user: User) => set({ user }),
+
+    setUserPlan: (plan: UserPlan) => set({ userPlan: plan }),
 
     setRole: (role: string) => set((state) => ({
         user: {
